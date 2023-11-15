@@ -1,0 +1,50 @@
+<!-- Plugin Configuration File. Read more: https://plugins.jetbrains.com/docs/intellij/plugin-configuration-file.html -->
+<idea-plugin>
+    <!-- Unique identifier of the plugin. It should be FQN. It cannot be changed between the plugin versions. -->
+    <id>com.masca.plugin.MaSCA</id>
+
+    <!-- Public plugin name should be written in Title Case.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-name -->
+    <name>MaSCA</name>
+
+    <!-- A displayed Vendor name or Organization ID displayed on the Plugins Page. -->
+    <vendor email="support@yourcompany.com" url="https://www.yourcompany.com">MaSCA</vendor>
+
+    <!-- Description of the plugin displayed on the Plugin Page and IDE Plugin Manager.
+         Simple HTML elements (text formatting, paragraphs, and lists) can be added inside of <![CDATA[ ]]> tag.
+         Guidelines: https://plugins.jetbrains.com/docs/marketplace/plugin-overview-page.html#plugin-description -->
+    <description><![CDATA[
+    Scan vulnerabilities of your projects<br>
+    with MaSCA IDE plugin
+  ]]></description>
+
+    <!-- Product and plugin compatibility requirements.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html -->
+    <depends>com.intellij.modules.platform</depends>
+
+    <!-- Extension points defined by the plugin.
+         Read more: https://plugins.jetbrains.com/docs/intellij/plugin-extension-points.html -->
+    <extensions defaultExtensionNs="com.intellij">
+        <notificationGroup id="MaSCA Notifications" displayType="BALLOON"/>
+        <applicationConfigurable parentId="tools"
+                                 instance="com.masca.plugin.masca.settings.MascaSettingsConfig"
+                                 id="com.masca.plugin.masca.settings.MascaSettingsConfig"
+                                 displayName="MaSCA: Settings"/>
+        <applicationService serviceImplementation="com.masca.plugin.masca.settings.MascaSettingsState"/>
+    </extensions>
+
+    <actions>
+        <group id="com.masca.plugin.masca.group.main" text="MaSCA" description="MaSCA actions">
+            <add-to-group group-id="MainMenu" anchor="last"/>
+
+            <action id="com.masca.plugin.masca.actions.OpenMascaSettingsAction" icon="AllIcons.General.Settings"
+                    class="com.masca.plugin.masca.actions.OpenMascaSettingsAction" text="Open Settings"
+                    description="Show MaSCA settings"/>
+
+            <action id="com.masca.plugin.masca.actions.FindVulnerabilitiesAction" icon="AllIcons.Actions.ProjectWideAnalysisOn"
+                    class="com.masca.plugin.masca.actions.FindVulnerabilitiesAction" text="Find Vulnerabilities"
+                    description="Find packages vulnerabilities"/>
+        </group>
+
+    </actions>
+</idea-plugin>
